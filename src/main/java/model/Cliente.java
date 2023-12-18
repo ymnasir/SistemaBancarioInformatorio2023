@@ -43,6 +43,9 @@ public class Cliente {
 	}
 	
 	public void eliminarCuenta(Long nroCuenta) {
+		if (nroCuenta == null) {
+			return;
+		}
 		if (cuentaExiste(nroCuenta)) {
 			cuentas.remove(nroCuenta);
 		}
@@ -73,6 +76,9 @@ public class Cliente {
 	}
 	
 	public Cuenta getCuentaById(Long nroCuenta) {
+		if (nroCuenta == null) {
+			return null;
+		}
 		return cuentas.get(nroCuenta);
 	}
 	

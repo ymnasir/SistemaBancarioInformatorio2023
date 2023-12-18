@@ -20,12 +20,11 @@ public class Banco {
 		return clientes.containsKey(dni);
 	}
 	
-	public void registrarCliente(Long dni, String nombre, String direccion) {
-		if (clienteExiste(dni)) {
+	public void registrarCliente(Cliente c) {
+		if (clienteExiste(c.getDni())) {
 			return;
 		}
-		Cliente c = new Cliente(dni, nombre, direccion);
-		clientes.put(dni, c);
+		clientes.put(c.getDni(), c);
 	}
 	
 	public void abrirCuenta(Long dni, Cuenta c) {

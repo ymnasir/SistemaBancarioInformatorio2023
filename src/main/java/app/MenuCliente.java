@@ -4,22 +4,21 @@ import java.util.Scanner;
 
 import app.service.*;
 import model.*;
+import app.input.InputSingleton;
 
 public class MenuCliente {
-	private Double sobregiroBanco;
-	private Double tasaInteresBanco;
+	private Banco banco;
 	private ClienteService clienteSrv;
 	private static String div = "-".repeat(30);
 	
 	public MenuCliente(Banco banco, Long dni) {
 		this.clienteSrv = new ClienteService(banco.getClienteByDni(dni));
-		this.sobregiroBanco = banco.getSobregiro();
-		this.tasaInteresBanco = banco.getInteres();
+		this.banco = banco;
 	}
 
 	public void run() {
 		Boolean cerrar = false;
-		Scanner scan = InputService.getScanner();
+		Scanner scan = InputSingleton.getScanner();
 		while (!cerrar) {
 			System.out.println(div);
 			System.out.println("¿Qué quiere hacer?");
@@ -40,7 +39,7 @@ public class MenuCliente {
 					clienteSrv.mostrarCuentas();
 					break;
 				case "2":
-					clienteSrv.abrirCuenta(sobregiroBanco, tasaInteresBanco);
+					clienteSrv.abrirCuenta(banco.getSobregiro(), banco.getInteres());
 					break;
 				case "3":
 					clienteSrv.eliminarCuenta();
@@ -53,7 +52,6 @@ public class MenuCliente {
 					break;
 				default:
 					System.out.println("Opción inválida, intentelo de nuevo.");
-				
 			
 			}
 		}
